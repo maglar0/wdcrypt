@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Encfs Management</title>
+        <link href="main.css" rel="stylesheet" type="text/css">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, minimum-scale=1, maximum-scale=1">
+        <!-- <script type="text/javascript" src="cssrefresh.js"></script> -->
+        <script type="text/javascript">
+            setTimeout(function() {
+                    var div = document.getElementById("loading");
+                    // This div tag is completely removed ("overwritten") when the actual content is rendered
+                    // using React. Thus the loading message is only shown if it takes more than 750 ms to
+                    // load and render the React content.
+                    if (div) {
+                        div.innerText = "Loading...";
+                    }
+                },
+                750);
+        </script>
+    </head>
+    <body>
+        <div id="main">
+            <div id="loading">
+                <noscript>JavaScript required</noscript>
+            </div>
+        </div>
+        <div id="initerror"></div>
+    </body>
+
+    <script src="main.js"></script>
+
+</html>
