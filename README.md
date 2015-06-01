@@ -3,7 +3,7 @@
 
 ## Overview
 
-Easy to use encryption on the [Western Digital MyPassport Wireless](http://www.wdc.com/en/products/products.aspx?id=1330) series of hard drives. A few simple steps to install, then manage everything with a web GUI.
+Easy to use encryption on the [Western Digital MyPassport Wireless](http://www.wdc.com/en/products/products.aspx?id=1330) series of hard drives. A few simple steps to install, then manage everything with a web GUI. A demo of the web GUI is available [here](https://maglar0.github.io/wdcrypt/?demomode=1).
 
 This is purely a hobby project and in no way endorsed by or associated with Western Digital.
 
