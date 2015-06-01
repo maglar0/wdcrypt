@@ -1,0 +1,223 @@
+@import "node_modules/material-ui/src/less/scaffolding.less";
+
+//Define a custom less file to override any variables defined in scaffolding.less
+//@import "custom-overrides.less";
+
+@import "node_modules/material-ui/src/less/components.less";
+
+html {
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+}
+
+.main {
+    @media all and (max-width: 360px) {
+        width: 95%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5px;
+    }
+    @media all and (min-width: 361px) and (max-width: 600px) {
+        width: 350px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10px;
+    }
+    @media all and  (min-width: 601px) {
+        width: 350px;
+        margin-left: 100px;
+        margin-top: 10px;
+    }
+}
+
+.main-paper {
+    width: 100%;
+}
+
+.tabbar {
+    list-style: none;
+    display: block;
+    width: 100%;
+    height: 48px;
+    position: relative;
+    margin: 0 auto;
+    white-space: nowrap;
+    
+    &:first-child>.tab {
+        //padding-left: 5px;
+    }
+}
+
+.tab-active {
+    color: #fff;
+}
+.tab-inactive {
+    color: #ddd;
+}
+.tab-inactive:hover {
+    color: #eee;
+}
+
+.tab {
+    background-color: @app-bar-color;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0;
+    font-weight: bold;
+
+    float: left;
+    display: block;
+    text-align: center;
+    padding: 0;
+    width: 25%;
+    height: 100%;
+    line-height: 48px;
+    margin: 0;
+
+    &:hover {
+        cursor: pointer
+    }
+
+    a {
+        width: 100%;
+        //padding: 20px;
+    }
+
+    a:focus {
+        outline: none
+    }
+}
+
+.main-state-active {
+    background-color: #ddd;
+}
+
+h1 {
+    display: block;
+}
+
+.mui-drop-down-menu {
+    width: 304px;
+    margin-top: 9px;
+    margin-bottom: 2px;
+}
+
+.mui-text-field {
+    margin-top: 2px;
+    padding-left: 24px;
+}
+
+.mui-checkbox {
+    margin-top: 25px;
+    padding-left: 20px;
+}
+
+.mui-toggle {
+    margin-top: 30px;
+    padding-left: 24px;
+    width: 300px;
+}
+
+.init-error {
+    margin: 20px;
+    width: 100%;
+    h1 {
+        font-size: 200%;
+    }
+    pre {
+        font-size: 150%;
+        color: red;
+    }
+}
+
+// Taken from http://css-tricks.com/snippets/css/make-pre-text-wrap/
+pre {
+    white-space: pre-wrap;       /* css-3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+.progress-dialog-content {
+    width: 100%;
+
+    @media all and (min-device-height: 500px) {
+        height: 280px;
+    }
+    @media all and (min-device-height: 400px) and (max-device-height: 499px) {
+        height: 230px;
+    }
+    @media all and (min-device-height: 300px) and (max-device-height: 399px) {
+        height: 130px;
+    }
+    @media all and (max-device-height: 299px) {
+        height: 100px;
+    }
+
+    .mui-paper {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.dialog-output-container {
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.output-command {
+    // This is acually not shown since it reveals passwords.
+    // Comment out the following line to aid debugging.
+    display: none;
+
+    &:before {
+        content:"# ";
+    }
+    &:after {
+        content:"\000AWARNING, THIS SHOULD NOT BE VISIBLE IN RELEASE MODE\000A";
+    }
+    font-weight: bold;
+}
+
+.output-stderr {
+    color: red;
+}
+
+.result-success {
+    &:before {
+        content:"\000A";
+    }
+    color: green;
+}
+
+.result-failure {
+    &:before {
+        content:"\000A";
+    }
+    color: red;
+}
+
+.tab-content {
+    box-sizing: border-box;
+    position: relative;
+    padding-top: 10px;
+    padding-left: 7px;
+    width: 100%;
+    height: 500px;
+}
+
+.main-action-button {
+    position: absolute;
+    bottom: 13px;
+    left: 13px;
+}
+
+.create-note {
+    margin: 25px 20px 10px 24px;
+    width: 80%;
+}
+
+.create-note-note {
+    font-weight: bold;
+}

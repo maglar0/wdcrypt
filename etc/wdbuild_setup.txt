@@ -1,0 +1,67 @@
+--------------------
+
+Partitioned drive, chose btrfs as file system. Then (before starting installation) opened a shell and executed
+
+$ mount -o remount,compress /target -t btrfs
+
+
+Changed fstab so that btrfs is mounted with "defaults,compress"
+
+
+
+$ apt-get install sudo
+
+$ adduser wd sudo
+
+
+
+Followed 
+https://wiki.debian.org/CrossToolchains#Status_of_cross-toolchains_in_the_Debian_archive
+
+$ echo "deb http://emdebian.org/tools/debian/ jessie main" > /etc/apt/sources.list.d/crosstools.list
+
+$ apt-get install curl
+
+$ curl http://emdebian.org/tools/debian/emdebian-toolchain-archive.key | sudo apt-key add -
+
+$ dpkg --add-architecture armhf
+
+$ sudo apt-get update
+
+$ sudo apt-get install crossbuild-essential-armhf
+
+
+
+$ apt-get clean
+
+$ apt-get install xutils-dev
+
+$ apt-get install autoconf
+
+$ apt-get install libtool
+
+$ apt-get install gettext
+
+$ apt-get install pkg-config
+
+
+
+$ apt-get install node
+
+$ update-alternatives --install /usr/bin/node nodejs /usr/bin/nodejs 100
+
+$ apt-get install npm
+
+
+
+
+---------------------
+
+sudo adduser wd sudo
+
+Followed 
+https://wiki.debian.org/CrossToolchains#Status_of_cross-toolchains_in_the_Debian_archive
+
+
+
+

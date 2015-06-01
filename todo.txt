@@ -1,0 +1,44 @@
+
+
+// MUST DO
+
+
+
+// NICE TO HAVE
+
+- Special characters in passwords (space, !, &, etc)
+
+- Confirmation dialog with volume size for delete
+
+- Make disk image for building
+
+
+
+// FUTURE
+
+- Fancy animated active tab indicator
+
+
+
+// COMPLETE
+
+- Update volumes after operations.
+
+- Update material-ui since it throws exceptions about replacestate all the time.
+
+- BUG: Can't unmount
+
+- Fix for mobile
+
+- Remove CSS auto refresh
+
+- Minimize JavaScript & CSS
+
+- Make installer package
+
+- Test. 
+   * Dashes/underscores in volume name and passwords
+
+- Add attributes to INPUT tags, autosave, autocomplete, spellcheck, 
+
+- tabindex

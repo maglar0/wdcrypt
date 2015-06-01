@@ -1,0 +1,10 @@
+using gcc : arm : arm-linux-gnueabihf-g++ :
+          <compileflags>-O3
+          <compileflags>-march=armv7-a
+          <compileflags>-s
+          <compileflags>-mtune=cortex-a8
+          <compileflags>-fexpensive-optimizations
+          <compileflags>-mfpu=neon
+          <compileflags>-mhard-float
+;
+

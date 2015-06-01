@@ -1,0 +1,64 @@
+#!/bin/sh
+#
+# Removes leftover directories from encfs mounts.
+#
+
+remove_dir_if_empty(){
+    if [ ! "$(mount | grep ^encfs\ on\ $1\ type)" ] ; then
+        if [ -d "$1" ] ; then
+            if [ ! "$(ls -A $1)" ] ; then
+                echo "Removing empty directory $1"
+                rmdir "$1"
+            fi
+        fi
+    fi            
+}
+
+# Returns 0 if $1/$2 and $1/.$2/encfs*.xml exist, otherwise 1
+is_encfs_mount_point(){
+    if [ -d "$1/$2" ] ; then
+        find "$1/.$2" -maxdepth 1 -name '.encfs*.xml' >/dev/null 2>/dev/null
+        return $?
+    fi
+
+    return 1
+}
+
+remove_empty_mount_points()
+{
+    MOUNT_DIRS="/var/ftp/Public /DataVolume /media/sdb1"
+    for CONTAINING_DIR in $MOUNT_DIRS ; do
+        for DIR in $(ls $CONTAINING_DIR) ; do
+            if is_encfs_mount_point "$CONTAINING_DIR" "$DIR" ; then
+                remove_dir_if_empty "$CONTAINING_DIR/$DIR"
+            fi
+        done
+    done
+}
+
+unmount_all_encfs()
+{
+    for ENCFS_VOLUME in $(/home/root/wdcrypt/shell_scripts/listEncfsEncryptedDirectories.sh) ; do
+        NUM_MOUNTPOINTS="$(/home/root/wdcrypt/shell_scripts/getNumMountPoints.sh $ENCFS_VOLUME)"
+        if [ "$NUM_MOUNTPOINTS" != "0" ] ; then
+            /home/root/wdcrypt/shell_scripts/unmountEncfs.sh "$ENCFS_VOLUME" 1
+        fi
+    done
+}
+
+case "$1" in
+  start)
+    	remove_empty_mount_points
+	;;
+  stop)
+	unmount_all_encfs
+	remove_empty_mount_points
+	;;
+  restart|reload)
+	;;
+  *)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?

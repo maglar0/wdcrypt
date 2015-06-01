@@ -1,0 +1,2 @@
+381a382
+> "linux-armv7a",	"gcc: -O3 -Wall -march=armv7-a -mtune=cortex-a8 -s -march=armv7-a -mtune=cortex-a8 -fexpensive-optimizations -mfpu=neon -mhard-float::-D_REENTRANT:::BN_LLONG RC4_CHAR RC4_CHUNK DES_INT DES_UNROLL BF_PTR:${armv4_asm}:::::",
