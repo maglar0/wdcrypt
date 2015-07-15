@@ -70,3 +70,6 @@ check_installation_prerequisites
 
 do_install
 
+echo ""
+echo "Installation complete. Start using it by browsing to http://192.168.60.1/crypto"
+echo ""
