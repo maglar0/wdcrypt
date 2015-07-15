@@ -4,7 +4,7 @@
 # $1 = name (e.g. "vault")
 # $2 = force unmount (optional, must be 0 or 1 if present)
 
-ENCFS=/home/root/encfs/encfs
+ENCFS=/home/root/wdcrypt/encfs
 
 MOUNTDIRS="/media/sdb1 /DataVolume /var/ftp/Public"
 

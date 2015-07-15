@@ -3,7 +3,7 @@
 # Delete encfs volume
 # $1 = name (e.g. "vault")
 
-ENCFS=/home/root/encfs/encfs
+ENCFS=/home/root/wdcrypt/encfs
 
 MOUNTDIRS="/media/sdb1 /DataVolume /var/ftp/Public"
 

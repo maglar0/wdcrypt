@@ -5,7 +5,7 @@
 # /DataVolume/$1
 # /var/ftp/Public/$1
 
-ENCFS=/home/root/encfs/encfs
+ENCFS=/home/root/wdcrypt/encfs
 
 MOUNTDIRS="/media/sdb1 /DataVolume /var/ftp/Public"
 

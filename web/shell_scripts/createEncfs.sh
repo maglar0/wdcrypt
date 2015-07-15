@@ -43,7 +43,7 @@ fi
 
 
 
-ENCFS=/home/root/encfs/encfs
+ENCFS=/home/root/wdcrypt/encfs
 
 MOUNTDIRS="/media/sdb1 /DataVolume /var/ftp/Public"
 
