@@ -115,13 +115,21 @@ function IsReservedVolumeName(volumeName) {
 var MountComponent = React.createClass({
 
     getInitialState: function() {
+        var initialSelectedVolume = this.props.initialSelectedVolume;
+        var menuItems = this.getMenuItems();
+        var selectedIndex = _.findIndex(menuItems, function(item) {
+                return item.text == initialSelectedVolume;
+            })
+          
         return {password: "",
-                showButtonPressErrors: false};
+                showButtonPressErrors: false,
+                selectedIndex: Math.max(0, selectedIndex)};
     },
     
     onVolumeChange: function(e, selectedIndex, menuItem) {
         this.setState({password: "",
-                       showButtonPressErrors: false});
+                       showButtonPressErrors: false,
+                       selectedIndex: selectedIndex});
     },
     
     onPasswordChange: function(e) {
@@ -160,7 +168,7 @@ var MountComponent = React.createClass({
         }
     },
     
-    render: function() {
+    getMenuItems: function() {
         var menuItems = [];
         
         _.each(this.props.volumes, function(item, index) {
@@ -168,6 +176,12 @@ var MountComponent = React.createClass({
                 menuItems.push({payload: item.name, text: item.name});
             }
         });
+
+        return menuItems;
+    },
+    
+    render: function() {
+        var menuItems = this.getMenuItems()
 
         if (this.props.volumes.length === 0) {
             return (
@@ -185,9 +199,6 @@ var MountComponent = React.createClass({
             var passwordStatus = GetPasswordStatus(this.state.password);
             var passwordErrorMessage = GetErrorMessage(passwordStatus, this.state.showButtonPressErrors);
             
-            var selectedVolumeName = (this.refs.menu ?
-                    this.refs.menu.props.menuItems[this.refs.menu.state.selectedIndex] : menuItems[0]).payload;
-            
             return (
                 <div className="tab-content">
                     <mui.DropDownMenu
@@ -196,6 +207,7 @@ var MountComponent = React.createClass({
                             onChange={this.onVolumeChange}
                             autoWidth={false}
                             tabIndex="-1"
+                            selectedIndex={this.state.selectedIndex}
                         />
                     <mui.TextField
                             ref="password"
@@ -534,7 +546,7 @@ var DeleteComponent = React.createClass({
 
 function createComponentsFromServerJson(json) {
     var result = [];
-    _.each(json, function(output) {
+    _.each(json, function(output, index) {
         // Handle 3 (command return value) specially.
         if (output[0] !== MAX_MOUNT_POINTS) {
             // output[0]=0 (command line) is hidden using CSS since it reveals passwords.
@@ -543,20 +555,20 @@ function createComponentsFromServerJson(json) {
                             2: "output-stderr"
                         }[output[0]];
             result.push(
-                <span className={className}>
+                <span className={className} key={"key" + index}>
                     {output[1]}
                 </span>);
         }
         else {
             if (output[1] === 0) {
                 result.push(
-                    <span className="result-success">
+                    <span className="result-success" key={"key" + index}>
                         {"Success\n"}
                     </span>);
             }
             else {
                 result.push(
-                    <span className="result-failure">
+                    <span className="result-failure" key={"key" + index}>
                         {"Failure\n"}
                     </span>);
             }
@@ -607,6 +619,7 @@ var ProgressDialog = React.createClass({
                     ref="dialog"
                     className="mui-dialog"
                     actions={[<mui.FlatButton
+                                    key="okbutton"
                                     secondary={true}
                                     onClick={this.props.onOkClicked}
                                     label="Ok"
@@ -644,6 +657,7 @@ var TabBar = React.createClass({
             this.props.tabNames.map(function(tabName, index) {
                 return (
                     <li className={"tab " + (this.props.activeTabIndex === index ? "tab-active" : "tab-inactive")}
+                            key={"tab" + index}
                             onClick={this.onClick.bind(this, index)} >
                         <a onClick={this.onClick.bind(this, index)}
                                     tabIndex={this.props.showingModal ? "-1" : ("" + (10 + index))}
@@ -688,6 +702,7 @@ var MainComponent = React.createClass({
     },
     
     onMountClicked: function(volumeName, password) {
+        this.setState({lastAttemptedMountVolumeName: volumeName});
         this.props.onMountClicked(this.props.volumes, volumeName, password);
     },
 
@@ -730,7 +745,8 @@ var MainComponent = React.createClass({
         return {showingModal: false,
                 activeTabIndex: startTab,
                 restartKeyIndex: 0,
-                showPassword: false
+                showPassword: false,
+                lastAttemptedMountVolumeName: null
             };
     },
     
@@ -753,6 +769,7 @@ var MainComponent = React.createClass({
         if (this.state.showingModal) {
             modal =
                 <ProgressDialog
+                        key="modal"
                         ref="modal"
                         title={this.props.modalTitle}
                         complete={!this.props.showModal}
@@ -773,6 +790,7 @@ var MainComponent = React.createClass({
                             showPassword={this.state.showPassword}
                             onShowPasswordToggle={this.onShowPasswordToggle}
                             showingModal={this.state.showingModal}
+                            initialSelectedVolume={this.state.lastAttemptedMountVolumeName}
                         />
                 break;
             case 1:
